@@ -1,6 +1,7 @@
 from corsheaders.defaults import default_headers
 import os
 from pathlib import Path
+from .JWT_SETTINGS import JWT_SETTINGS
 
 # time
 import datetime
@@ -31,17 +32,24 @@ INSTALLED_APPS = [
     'corsheaders',                  # CORS
 
     # local Applications
-    'myapp',
+    'config',
+    'myapp'
 ]
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.TokenAuthentication',
-    ),
+    # 'DEFAULT_AUTHENTICATION_CLASSES': (
+    #     'rest_framework.authentication.TokenAuthentication',
+    # ),
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.AllowAny',
     ),
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
 }
+
+# JWT Settings
+SIMPLE_JWT = JWT_SETTINGS
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
